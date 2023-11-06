@@ -107,6 +107,7 @@ FIELDS = [
     "B09001_001E",  # Population under age 18
 ]
 
+# Original weights determined by the community advisory team:
 WEIGHTS = [
     {
         "name": "Percent People of color",
