@@ -71,6 +71,10 @@ def transform(census_data):
         inplace=True,
     )
 
+    # Replacing missing values in median income with the average for the region
+    avg_inc = census_data[census_data["median_hh_inc"] != -666666666]["median_hh_inc"].mean()
+    census_data["median_hh_inc"] = census_data["median_hh_inc"].replace(-666666666, avg_inc)
+
     # Census calculations
     census_data["tot_age_70_to_79"] = (
             census_data["B01001_022E"]
@@ -158,42 +162,42 @@ def transform(census_data):
                                                  + census_data["tot_nhpi"]
                                          ) / census_data["tot_pop"]
     census_data["pct_food_stamps"] = (
-            census_data["tot_food_stamps"] / census_data["univ_food_stamps"]
-    )
+            census_data["tot_food_stamps"].divide(census_data["univ_food_stamps"])
+    ).fillna(0)
     census_data["pct_no_device"] = (
-            census_data["tot_no_device"] / census_data["univ_devices"]
-    )
+            census_data["tot_no_device"].divide(census_data["univ_devices"])
+    ).fillna(0)
     census_data["pctovercrowd"] = (
-            census_data["total_overcrowded_households"] / census_data["B25014_001E"]
-    )
+            census_data["total_overcrowded_households"].divide(census_data["B25014_001E"])
+    ).fillna(0)
     census_data["pct_unemployed"] = (
-            census_data["tot_unemployed"] / census_data["B23025_001E"]
-    )
-    census_data["pct_wfh"] = census_data["tot_wfh"] / census_data["B08101_001E"]
+            census_data["tot_unemployed"].divide(census_data["B23025_001E"])
+    ).fillna(0)
+    census_data["pct_wfh"] = (census_data["tot_wfh"].divide(census_data["B08101_001E"])).fillna(0)
     census_data["pct_unenrolled"] = (
-            census_data["tot_unenrolled_school"] / census_data["tot_age_under_18"]
-    )
+            census_data["tot_unenrolled_school"].divide(census_data["tot_age_under_18"])
+    ).fillna(0)
     census_data["pct_wo_broadband"] = (
-            census_data["tot_wo_broadband"] / census_data["B28002_001E"]
-    )
-    census_data["pct_less_vehicles"] = census_data["tot_less_vehicle"] / (
-            census_data["B08203_001E"] - census_data["B08203_007E"]
-    )
+            census_data["tot_wo_broadband"].divide(census_data["B28002_001E"])
+    ).fillna(0)
+    census_data["pct_less_vehicles"] = census_data["tot_less_vehicle"].divide((
+            census_data["B08203_001E"] - census_data["B08203_007E"])
+    ).fillna(0)
     census_data["pct_lang_home"] = (
-            census_data["tot_home_lang"] / census_data["C16002_001E"]
-    )
+            census_data["tot_home_lang"].divide(census_data["C16002_001E"])
+    ).fillna(0)
     census_data["pct_mortgage_over35"] = (
-            census_data["tot_mortgage_over35"] / census_data["B25091_001E"]
-    )
+            census_data["tot_mortgage_over35"].divide(census_data["B25091_001E"])
+    ).fillna(0)
     census_data["pct_rent_over35"] = (
-            census_data["tot_rent_over35"] / census_data["B25070_001E"]
-    )
+            census_data["tot_rent_over35"].divide(census_data["B25070_001E"])
+    ).fillna(0)
     census_data["pct_with_disability"] = (
-            census_data["tot_with_disability"] / census_data["tot_pop"]
+            census_data["tot_with_disability"].divide(census_data["tot_pop"])
     )
     census_data["pct_eng_prof"] = (
-            census_data["tot_eng_prof"] / census_data["C16002_001E"]
-    )
+            census_data["tot_eng_prof"].divide(census_data["C16002_001E"])
+    ).fillna(0)
 
     return census_data
 
