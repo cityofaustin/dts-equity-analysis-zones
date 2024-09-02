@@ -119,7 +119,8 @@ def transform(census_data):
         census_data["C16002_001E"] - census_data["C16002_002E"]
     )
     census_data["tot_wfh"] = census_data["B08101_001E"] - census_data["B08101_049E"]
-    census_data["tot_unenrolled_school"] = (
+
+    census_data["tot_unenrolled_school"] = census_data["B14001_001E"] - (
         census_data["B14001_003E"]
         + census_data["B14001_004E"]
         + census_data["B14001_005E"]
@@ -278,7 +279,10 @@ def get_geometry(df, year):
     # Gets the TIGER geometry for the census tracts
     geom = tracts(state="TX", year=year, cache=True)
     geom = geom[["GEOID", "geometry"]]
-    df = df[["GEO_ID", "NAME", "indexed_vulnerability", "eaz_type"]]
+    output_cols = ["GEO_ID", "NAME", "indexed_vulnerability", "eaz_type"] + [
+        w["column"] for w in WEIGHTS
+    ]
+    df = df[output_cols]
     df["GEOID"] = df["GEO_ID"].str[9:20]
     gdf = geom.merge(df, on="GEOID", how="right")
     gdf.drop(columns=["GEO_ID"], inplace=True)
