@@ -11,20 +11,20 @@ You can either build the docker image yourself, or pull the image from our atddo
 
 If you are building your own image, be sure you are in the `maps/` subdirectory  
 ```
-$ docker pull atddocker/dts-equity-analysis-zones-map
+docker pull atddocker/dts-equity-analysis-zones-map
 ```
 
 --or--
 
 ```
-$ docker build -t atddocker/dts-equity-analysis-zones-map . --platform linux/amd64
+docker build -t atddocker/dts-equity-analysis-zones-map . --platform linux/amd64
 ```
 
 Then, run the script inside the docker container.
 
 ```
-$ docker run -p 8050:8050 -it --rm atddocker/dts-equity-analysis-zones-map /bin/bash
-$ python eaz_comparison_tool.py
+docker run -p 8050:8050 -it --rm atddocker/dts-equity-analysis-zones-map /bin/bash
+python eaz_comparison_tool.py
 ```
 
 Visit http://0.0.0.0:8050/ in your browser to view the app.
