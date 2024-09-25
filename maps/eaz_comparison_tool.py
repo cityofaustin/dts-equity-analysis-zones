@@ -12,8 +12,9 @@ from map_config import variables, variable_labels, dimension_labels, order
 
 def main():
     # Reading in geometry data
-    eaz = gpd.read_file("atx_eaz_multi_year.geojson")
-    geojson = eaz.__geo_interface__
+    eaz = pd.read_csv("atx_eaz_multi_year.csv")
+    geom = gpd.read_file("census_tract_geometry.geojson")
+    geojson = geom.__geo_interface__
 
     # Household income was set as negative
     eaz["median_hh_inc"] = eaz["median_hh_inc"] * -1
@@ -23,7 +24,7 @@ def main():
     max_year = eaz["acs_year"].max()
 
     # Flipping the dataframe so each row is a year's variable
-    id_variables = ["GEOID", "acs_year", "geometry", "NAME", "eaz_type"]
+    id_variables = ["GEOID", "acs_year", "NAME", "eaz_type"]
     df_long = eaz.melt(
         id_vars=id_variables, var_name="variable", value_name="value"
     )
@@ -44,6 +45,10 @@ def main():
 
     # combining both absolute and relative measures
     df_long = pd.concat([df_difference, df_long])
+
+    # merge in geometry
+    df_long["GEOID"] = df_long["GEOID"].astype(str)
+    df_long = geom.merge(df_long, on="GEOID", how="right")
 
     # Data for the bar plot
     eaz_type = eaz[["GEOID", "eaz_type", "acs_year"]]
@@ -257,4 +262,4 @@ def update_plots(selected_variable, selected_dimension, selected_year):
 
 # Run the app
 if __name__ == "__main__":
-    app.run_server(debug=True)
+    app.run_server(debug=False, host="0.0.0.0", port=8050)

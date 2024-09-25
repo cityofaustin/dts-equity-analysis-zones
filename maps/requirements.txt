@@ -2,8 +2,6 @@ pandas==2.1.*
 pyproj
 geopandas==0.14.*
 shapely==2.0.*
-psycopg2-binary==2.9.*
-sodapy==2.1.*
 
 # dash/plotly for visualization
 dash==2.17.*
