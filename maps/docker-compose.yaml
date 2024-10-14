@@ -1,0 +1,19 @@
+services:
+  haproxy:
+    restart: unless-stopped
+    image: haproxy:2.6
+    ports:
+      - 80:80
+    volumes:
+      - ./haproxy/haproxy.cfg:/usr/local/etc/haproxy/haproxy.cfg
+      - ./haproxy/ssl:/usr/local/etc/haproxy/ssl
+    depends_on:
+      - equitymap
+  equitymap:
+    image: atddocker/dts-equity-analysis-zones:production
+    restart: always
+    ports:
+      - 8050:8050
+    volumes:
+      - .:/root/app
+    command: ["python", "eaz_comparison_tool.py"]
