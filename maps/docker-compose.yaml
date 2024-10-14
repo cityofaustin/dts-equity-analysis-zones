@@ -4,9 +4,10 @@ services:
     image: haproxy:2.6
     ports:
       - 80:80
+      - 443:443
     volumes:
       - ./haproxy/haproxy.cfg:/usr/local/etc/haproxy/haproxy.cfg
-      - ./haproxy/ssl:/usr/local/etc/haproxy/ssl
+      - ./haproxy/ssl:/haproxy/ssl/
     depends_on:
       - equitymap
   equitymap:
