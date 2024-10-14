@@ -1,1 +1,1 @@
-I am holding open this directory and I am very important
+When deploying, remove this README.md file and replace with pem file
