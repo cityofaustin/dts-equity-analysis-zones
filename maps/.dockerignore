@@ -1,0 +1,11 @@
+env_file
+.env
+.DS_Store
+.idea
+__pycache__/
+.ipynb_checkpoints/
+venv
+
+# Misc
+*.pem
+*.cert

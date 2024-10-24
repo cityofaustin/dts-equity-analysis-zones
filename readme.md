@@ -56,3 +56,14 @@ In the `gis` directory, geojson files are created for the years ran with the fol
 - `eaz_type`: the vulnerability category this tract falls into based on the index
 
 A map is generated of the vulnerability index for the region in the `images` directory. 
+
+## Equity Analysis Yearly Comparison Tool
+
+The `/maps` directory of this repo stores the code used to develop (and deploy) the yearly comparison tool. This tool allows
+comparisons of variables between different years of the ACS. It is hosted at [equitytool.austinmobility.io](https://equitytool.austinmobility.io/).
+
+![eaz tool example image](docs/imgs/eaz_tool.png)
+
+## Analysis
+
+The `/analysis` directory stores some one-off jupyter notebooks used for analysis and data wrangling. 
