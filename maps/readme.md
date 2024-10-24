@@ -1,5 +1,9 @@
 # Equity Analysis Yearly Comparison Tool
 
+Hosted at: [equitytool.austinmobility.io](https://equitytool.austinmobility.io/).
+
+![eaz tool example image](../docs/imgs/eaz_tool.png)
+
 This [dash](https://dash.plotly.com/) app enables users to see the changes to Austin's Equity Analysis Zones (EAZs) over time.
 
 The Census Bureau releases new 5-year estimates on an annual basis and this tool will enable longitudinal analysis of
@@ -38,3 +42,7 @@ docker compose up
 ```
 
 and visit https://localhost/
+
+## Deployment
+
+[Link to internal docs](https://app.gitbook.com/o/-LzDQOVGhTudbKRDGpUA/s/-M4Ul-hSBiM-3KkOynqS/equity-analysis-zone-tool)
