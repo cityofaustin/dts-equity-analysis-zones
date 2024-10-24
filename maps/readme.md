@@ -29,3 +29,12 @@ python eaz_comparison_tool.py
 
 Visit http://0.0.0.0:8050/ in your browser to view the app.
 
+
+Alternatively, you can use docker compose. There is a placeholder `README.md` file in `haproxy/ssl/` that needs to be deleted in order for haproxy to run without errors. Then run
+
+```
+docker compose up
+
+```
+
+and visit https://localhost/

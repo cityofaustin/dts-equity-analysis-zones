@@ -4,3 +4,8 @@ env_file
 .idea
 __pycache__/
 .ipynb_checkpoints/
+venv
+
+# Misc
+*.pem
+*.cert
