@@ -11,7 +11,6 @@ from config import FIELDS, REGION, WEIGHTS
 from utils import logging
 
 
-
 def load(year):
     # we have to match the sorting of the original work
     # so this query we will merge to preserve the sorting we need
@@ -84,78 +83,78 @@ def transform(census_data):
 
     # Census calculations
     census_data["tot_age_70_to_79"] = (
-            census_data["B01001_022E"]
-            + census_data["B01001_023E"]
-            + census_data["B01001_046E"]
-            + census_data["B01001_047E"]
+        census_data["B01001_022E"]
+        + census_data["B01001_023E"]
+        + census_data["B01001_046E"]
+        + census_data["B01001_047E"]
     )
     census_data["tot_age_over_80"] = (
-            census_data["B01001_024E"]
-            + census_data["B01001_025E"]
-            + census_data["B01001_048E"]
-            + census_data["B01001_049E"]
+        census_data["B01001_024E"]
+        + census_data["B01001_025E"]
+        + census_data["B01001_048E"]
+        + census_data["B01001_049E"]
     )
     census_data["tot_age_over_70"] = (
-            census_data["tot_age_70_to_79"] + census_data["tot_age_over_80"]
+        census_data["tot_age_70_to_79"] + census_data["tot_age_over_80"]
     )
     census_data["tot_ba"] = (
-            census_data["B15002_015E"]
-            + census_data["B15002_016E"]
-            + census_data["B15002_017E"]
-            + census_data["B15002_018E"]
-            + census_data["B15002_032E"]
-            + census_data["B15002_033E"]
-            + census_data["B15002_034E"]
-            + census_data["B15002_035E"]
+        census_data["B15002_015E"]
+        + census_data["B15002_016E"]
+        + census_data["B15002_017E"]
+        + census_data["B15002_018E"]
+        + census_data["B15002_032E"]
+        + census_data["B15002_033E"]
+        + census_data["B15002_034E"]
+        + census_data["B15002_035E"]
     )
     census_data["tot_noba"] = census_data["tot_adults"] - census_data["tot_ba"]
     census_data["tot_poc"] = census_data["tot_pop"] - census_data["tot_whitenh"]
     census_data["total_overcrowded_households"] = (
-            census_data["B25014_005E"]
-            + census_data["B25014_006E"]
-            + census_data["B25014_007E"]
-            + census_data["B25014_011E"]
-            + census_data["B25014_012E"]
-            + census_data["B25014_013E"]
+        census_data["B25014_005E"]
+        + census_data["B25014_006E"]
+        + census_data["B25014_007E"]
+        + census_data["B25014_011E"]
+        + census_data["B25014_012E"]
+        + census_data["B25014_013E"]
     )
     census_data["tot_home_lang"] = (
-            census_data["C16002_001E"] - census_data["C16002_002E"]
+        census_data["C16002_001E"] - census_data["C16002_002E"]
     )
     census_data["tot_wfh"] = census_data["B08101_001E"] - census_data["B08101_049E"]
 
     census_data["tot_unenrolled_school"] = census_data["B14001_001E"] - (
-            census_data["B14001_003E"]
-            + census_data["B14001_004E"]
-            + census_data["B14001_005E"]
-            + census_data["B14001_006E"]
-            + census_data["B14001_007E"]
+        census_data["B14001_003E"]
+        + census_data["B14001_004E"]
+        + census_data["B14001_005E"]
+        + census_data["B14001_006E"]
+        + census_data["B14001_007E"]
     )
     census_data["tot_wo_broadband"] = (
-            census_data["B28002_003E"] + census_data["B28002_013E"]
+        census_data["B28002_003E"] + census_data["B28002_013E"]
     )
     census_data["tot_less_vehicle"] = (
-            census_data["B08203_014E"]
-            + census_data["B08203_020E"]
-            + census_data["B08203_021E"]
-            + census_data["B08203_026E"]
-            + census_data["B08203_027E"]
-            + census_data["B08203_028E"]
+        census_data["B08203_014E"]
+        + census_data["B08203_020E"]
+        + census_data["B08203_021E"]
+        + census_data["B08203_026E"]
+        + census_data["B08203_027E"]
+        + census_data["B08203_028E"]
     )
     census_data["tot_mortgage_over35"] = (
-            census_data["B25091_009E"]
-            + census_data["B25091_010E"]
-            + census_data["B25091_011E"]
+        census_data["B25091_009E"]
+        + census_data["B25091_010E"]
+        + census_data["B25091_011E"]
     )
     census_data["tot_rent_over35"] = (
-            census_data["B25070_008E"]
-            + census_data["B25070_009E"]
-            + census_data["B25070_010E"]
+        census_data["B25070_008E"]
+        + census_data["B25070_009E"]
+        + census_data["B25070_010E"]
     )
     census_data["tot_eng_prof"] = (
-            census_data["C16002_004E"]
-            + census_data["C16002_007E"]
-            + census_data["C16002_010E"]
-            + census_data["C16002_013E"]
+        census_data["C16002_004E"]
+        + census_data["C16002_007E"]
+        + census_data["C16002_010E"]
+        + census_data["C16002_013E"]
     )
 
     census_data["pct_over_70"] = census_data["tot_age_over_70"] / census_data["tot_pop"]
@@ -164,11 +163,11 @@ def transform(census_data):
     census_data["pct_noba"] = census_data["tot_noba"] / census_data["tot_adults"]
     census_data["pct_poc"] = census_data["tot_poc"] / census_data["tot_pop"]
     census_data["pct_underserved_poc"] = (
-                                                 census_data["tot_black"]
-                                                 + census_data["tot_hisp"]
-                                                 + census_data["tot_aian"]
-                                                 + census_data["tot_nhpi"]
-                                         ) / census_data["tot_pop"]
+        census_data["tot_black"]
+        + census_data["tot_hisp"]
+        + census_data["tot_aian"]
+        + census_data["tot_nhpi"]
+    ) / census_data["tot_pop"]
     census_data["pct_food_stamps"] = (
         census_data["tot_food_stamps"].divide(census_data["univ_food_stamps"])
     ).fillna(0)
@@ -234,20 +233,20 @@ def apply_weights(census_data):
         if "negative weight" in item:
             census_data[item["column"]] = census_data[item["column"]] * -1
         census_data[item["name"]] = (
-                ntile(census_data, item["column"], n=100) * item["weight"]
+            ntile(census_data, item["column"], n=100) * item["weight"]
         )
         census_data["composite_vulnerability"] = (
-                census_data["composite_vulnerability"] + census_data[item["name"]]
+            census_data["composite_vulnerability"] + census_data[item["name"]]
         )
 
     # min-max normalization
     census_data["indexed_vulnerability"] = (
-                                                   census_data["composite_vulnerability"]
-                                                   - census_data["composite_vulnerability"].min()
-                                           ) / (
-                                                   census_data["composite_vulnerability"].max()
-                                                   - census_data["composite_vulnerability"].min()
-                                           )
+        census_data["composite_vulnerability"]
+        - census_data["composite_vulnerability"].min()
+    ) / (
+        census_data["composite_vulnerability"].max()
+        - census_data["composite_vulnerability"].min()
+    )
     census_data["indexed_vulnerability"] = census_data["indexed_vulnerability"] * 100
     census_data["eaz_type"] = census_data.apply(create_categories, axis=1)
     return census_data
