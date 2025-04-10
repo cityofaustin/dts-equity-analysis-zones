@@ -1,44 +1,46 @@
 import argparse
-import os
 
-import pandas as pd
 import math
 import numpy as np
-from census import Census
 from us import states
 from pygris import tracts
+from pygris.data import get_census
 import matplotlib.pyplot as plt
 
 from config import FIELDS, REGION, WEIGHTS
 from utils import logging
 
-# Get an API key here: https://api.census.gov/data/key_signup.html
-CENSUS_API_KEY = os.getenv("CENSUS_API_KEY")
-c = Census(CENSUS_API_KEY)
-
 
 def load(year):
     # we have to match the sorting of the original work
     # so this query we will merge to preserve the sorting we need
-    sort_query = c.acs5.state_county_tract(
-        fields=["NAME", "B01001_001E"],
-        state_fips=states.TX.fips,
-        county_fips="*",
-        tract="*",
+    sort_query = get_census(
+        dataset="acs/acs5",
+        variables=["NAME", "B01001_001E", "COUNTY"],
         year=year,
+        params={
+            "for": "tract:*",
+            "in": f"state:{states.TX.fips}",
+        },
+        return_geoid=True,
+        guess_dtypes=True,
     )
-    tx_census = c.acs5.state_county_tract(
-        fields=FIELDS,
-        state_fips=states.TX.fips,
-        county_fips="*",
-        tract="*",
+
+    df = get_census(
+        dataset="acs/acs5",
+        variables=FIELDS,
         year=year,
+        params={
+            "for": "tract:*",
+            "in": f"state:{states.TX.fips}",
+        },
+        return_geoid=True,
+        guess_dtypes=True,
     )
-    df = pd.DataFrame(tx_census)
-    sort_query = pd.DataFrame(sort_query)
-    sort_query = sort_query[sort_query["county"].isin(REGION)]
+
+    sort_query = sort_query[sort_query["COUNTY"].isin(REGION)]
     sort_query = sort_query[["NAME"]]
-    df = df[df["county"].isin(REGION)]
+    df = df[df["COUNTY"].isin(REGION)]
     df = sort_query.merge(df, on="NAME", how="left")
     return df
 
@@ -279,14 +281,11 @@ def get_geometry(df, year):
     # Gets the TIGER geometry for the census tracts
     geom = tracts(state="TX", year=year, cache=True)
     geom = geom[["GEOID", "geometry"]]
-    output_cols = ["GEO_ID", "NAME", "indexed_vulnerability", "eaz_type"] + [
+    output_cols = ["GEOID", "NAME", "indexed_vulnerability", "eaz_type"] + [
         w["column"] for w in WEIGHTS
     ]
     df = df[output_cols]
-    df["GEOID"] = df["GEO_ID"].str[9:20]
     gdf = geom.merge(df, on="GEOID", how="right")
-    gdf.drop(columns=["GEO_ID"], inplace=True)
-
     return gdf
 
 

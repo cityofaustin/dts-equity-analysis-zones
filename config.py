@@ -1,16 +1,17 @@
 # Counties selected in region
 REGION = [
-    "021",  # Bastrop
-    "055",  # Caldwell
-    "209",  # Hays
-    "453",  # Travis
-    "491",  # Williamson
+    21,  # Bastrop
+    55,  # Caldwell
+    209,  # Hays
+    453,  # Travis
+    491,  # Williamson
 ]
 
 # Fields pulled from Census, more info available at:
 # https://api.census.gov/data/{year}/acs/acs5/groups/{table ID}.json
 FIELDS = [
     "NAME",
+    "COUNTY",
     # Table B01001 SEX BY AGE
     "B01001_001E",  # Total survey count
     "B01001_022E",  # Male age 70-74
