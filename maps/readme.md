@@ -41,7 +41,7 @@ docker compose up
 
 ```
 
-and visit https://localhost/
+and visit https://localhost:9000/
 
 ## Deployment
 
