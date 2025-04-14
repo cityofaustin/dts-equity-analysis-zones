@@ -1,7 +1,7 @@
 services:
   equitymap:
     image: atddocker/dts-equity-analysis-zones:production
-    restart: always
+    restart: unless-stopped
     ports:
       - 8050:8050
     volumes:
