@@ -13,7 +13,8 @@ the EAZs.
 
 You can either build the docker image yourself, or pull the image from our atddocker dockerhub account.
 
-If you are building your own image, be sure you are in the `maps/` subdirectory  
+If you are building your own image, be sure you are in the `maps/` subdirectory
+
 ```
 docker pull atddocker/dts-equity-analysis-zones-map
 ```
@@ -33,7 +34,6 @@ python eaz_comparison_tool.py
 
 Visit http://0.0.0.0:8050/ in your browser to view the app.
 
-
 Alternatively, you can use docker compose. There is a placeholder `README.md` file in `haproxy/ssl/` that needs to be deleted in order for haproxy to run without errors. Then run
 
 ```
@@ -41,7 +41,7 @@ docker compose up
 
 ```
 
-and visit https://localhost/
+and visit https://localhost:9000/
 
 ## Deployment
 
