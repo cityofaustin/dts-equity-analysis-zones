@@ -45,7 +45,7 @@ and visit https://localhost:9000/
 
 ### Updating or Restarting the App
 
-The tool is deployed in an RDS bastion EC2 instance. The Flask app runs behind the bastion's HAProxy service, which listens on port 80 and forwards requests matching the hostname `equitytool.austinmobility.io` to this Docker Compose stack.
+The tool is deployed in an RDS bastion EC2 instance. The Flask app runs behind the [bastion's HAProxy service](https://github.com/cityofaustin/dts-services-haproxy), which listens on ports 80 and 443 and forwards requests matching the hostname `equitytool.austinmobility.io` to this Docker Compose stack, using these [rules](https://github.com/cityofaustin/dts-services-haproxy/blob/main/haproxy.cfg#L62-L63).
 
 To update or restart the app, follow these steps:
 
@@ -71,7 +71,7 @@ To update or restart the app, follow these steps:
 
 ### SSL/TLS Certificate
 
-The SSL/TLS certificate is sourced via [Let's Encrypt](https://letsencrypt.org/) and is manually renewed every 60 days.
+The SSL/TLS certificate is sourced via [Let's Encrypt](https://letsencrypt.org/) and is manually renewed every 60 days. [Forthcoming automation is planned](https://github.com/cityofaustin/atd-data-tech/issues/22212), and this marker will be replaced with operating instructions once that is in place.
 
 ### Additional Links
 
