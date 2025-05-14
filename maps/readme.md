@@ -1,6 +1,8 @@
 # Equity Analysis Yearly Comparison Tool
 
-Hosted at: [equitytool.austinmobility.io](https://equitytool.austinmobility.io/).
+Hosted at: [equitytool.austinmobility.io](https://equitytool.austinmobility.io/)
+
+Availability: COA network / VPN
 
 ![eaz tool example image](../docs/imgs/eaz_tool.png)
 
