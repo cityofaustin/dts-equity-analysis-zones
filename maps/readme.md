@@ -46,3 +46,7 @@ and visit https://localhost:9000/
 ## Deployment
 
 [Link to internal docs](https://app.gitbook.com/o/-LzDQOVGhTudbKRDGpUA/s/-M4Ul-hSBiM-3KkOynqS/equity-analysis-zone-tool)
+
+### SSL/TLS Certificate
+
+The SSL/TLS certificate is sourced via [Let's Encrypt](https://letsencrypt.org/) and is manually renewed every 60 days.
